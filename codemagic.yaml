@@ -8,11 +8,13 @@ workflows:
         VERSION_CODE: $CM_BUILD_ID
         GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4096m
       java: 21
+
     cache:
       cache_paths:
         - ~/.gradle/caches
         - ~/.gradle/wrapper
         - ~/.android/build-cache
+
     triggering:
       events:
         - push
@@ -22,23 +24,34 @@ workflows:
           include: true
         - pattern: 'master'
           include: true
+
     scripts:
-      - name: Checkout project
-        script: |
       - name: Prepare Gradle
         script: |
           echo "⚙️ Setting up Gradle wrapper..."
           chmod +x gradlew
+
       - name: Validate Gradle Wrapper
         script: |
+          echo "🔍 Validating Gradle wrapper (8.9)..."
           ./gradlew wrapper --gradle-version 8.9
+
       - name: Build Release APK
         script: |
           echo "🚀 Building release APK..."
           ./gradlew clean assembleRelease
+
+      - name: Rename APK for versioning
+        script: |
+          echo "🧱 Renaming output APK..."
+          OUTDIR="app/build/outputs/apk/release"
+          NEWNAME="Tracker_v${VERSION_NAME}_build${VERSION_CODE}.apk"
+          mv "$OUTDIR/app-release.apk" "$OUTDIR/$NEWNAME" || echo "⚠️ APK rename skipped (file not found)"
+
       - name: List output files
         script: |
-          echo "📦 Output APKs:"
+          echo "📦 Final output:"
           ls -lh app/build/outputs/apk/release/
+
     artifacts:
-      - app/build/outputs/**/*.apk
+      - app/build/outputs/apk/release/*.apk
