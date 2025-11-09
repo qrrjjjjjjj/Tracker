@@ -44,10 +44,3 @@ workflows:
           ls -lh app/build/outputs/apk/release/
     artifacts:
       - app/build/outputs/**/*.apk
-    publishing:
-      email:
-        recipients:
-          - $CM_USER_EMAIL
-        notify:
-          success: true
-          failure: true
