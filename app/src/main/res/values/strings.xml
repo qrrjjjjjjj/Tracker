@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tracker</string>
+    <string name="tab_log">Log</string>
+    <string name="tab_apps">Apps</string>
+    <string name="enable_listener">Enable Notification Access</string>
+    <string name="listener_enabled">Notification tracking is active</string>
+    <string name="listener_disabled">Grant notification access to start tracking</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="search_apps">Search apps…</string>
+    <string name="no_notifications">No notifications yet</string>
+    <string name="no_apps">No apps found</string>
+    <string name="select_apps_hint">Select apps to track their notifications</string>
+</resources>
