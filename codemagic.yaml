@@ -8,11 +8,11 @@ workflows:
         VERSION_CODE: $CM_BUILD_ID
         GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4096m
       java: 21
-      cache:
-        cache_paths:
-          - ~/.gradle/caches
-          - ~/.gradle/wrapper
-          - ~/.android/build-cache
+    cache:
+      cache_paths:
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
+        - ~/.android/build-cache
     triggering:
       events:
         - push
